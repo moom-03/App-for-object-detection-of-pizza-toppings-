@@ -28,7 +28,7 @@ st.title("YOLOv8 Model Comparison")
 
 conf = st.slider("Confidence threshold", 0.01, 1.0, 0.11)
 
-# --- Input type selector ---
+
 input_type = st.radio("Select input type", ["Image", "Video"])
 
 # =========================
@@ -49,9 +49,9 @@ if "last_frame_base" not in st.session_state:
 if "last_frame_best" not in st.session_state:
     st.session_state.last_frame_best = None
 
-# =========================
-# IMAGE PIPELINE (as before)
-# =========================
+# ===============
+# IMAGE PIPELINE
+# ===============
 if input_type == "Image":
     uploaded = st.file_uploader("Upload image", type=["jpg", "jpeg", "png"])
     if uploaded is not None:
@@ -155,7 +155,6 @@ else:
 
             st.session_state.frame_idx += 1
 
-            # Limit FPS (important for Streamlit stability)
             time.sleep(0.03)
 
         cap.release()
