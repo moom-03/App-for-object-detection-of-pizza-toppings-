@@ -4,25 +4,26 @@ import numpy as np
 from ultralytics import YOLO
 import tempfile
 import time
-from utils.model_loader import download_if_missing
+from model_loader import download_if_missing
 
 st.set_page_config(layout="wide")
 
 @st.cache_resource
 def load_models():
+    print('inside model loader')
     baseline_path = download_if_missing(
         "baseline.pt",
-        "https://github.com/moom-03/11802521_object-detection-of-pizza-toppings/releases/download/v1.0-models/baseline.pt"
+        "https://github.com/moom-03/App-for-object-detection-of-pizza-toppings-/releases/download/v1.0-models/baseline.pt"
     )
 
     improved_path = download_if_missing(
         "improved.pt",
-        "https://github.com/moom-03/11802521_object-detection-of-pizza-toppings/releases/download/v1.0-models/improved.pt"
+        "https://github.com/moom-03/App-for-object-detection-of-pizza-toppings-/releases/download/v1.0-models/improved.pt"
     )
-
     return YOLO(baseline_path), YOLO(improved_path)
 
 model_base, model_best = load_models()
+print('models loaded')
 st.title("YOLOv8 Model Comparison")
 
 conf = st.slider("Confidence threshold", 0.01, 1.0, 0.11)

@@ -20,4 +20,3 @@ def download_if_missing(model_name, url):
             f.write(chunk)
 
     return str(model_path)
-
